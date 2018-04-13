@@ -1,0 +1,42 @@
+﻿ApplicationName=»»Keyboard Layout Auto Switch««
+
+LocationBarRule=»»Location Bar««
+
+SearchBarRule=»»Search Bar««
+
+FindInPageRule=»»Find in Page««
+
+DefaultPageRule=»»Other web pages««
+
+DefaultUIElementRule=»»Other Browser controls««
+
+#{0}: Domain suffix
+DomainRule=»»{0} web pages««
+
+#{0}: Culture Name
+#{1}: Keyboard Layout Name
+LanguageDisplayFormat=»»{0} / {1}««
+
+FindInPageMatchWebPage=»»Match web page setting««
+
+LanguageDoNotChange=»»Do not change««
+
+LocationBarRuleDescription=»»When the Location Bar has the focus:««
+
+SearchBarRuleDescription=»»When the Search Bar has the focus:««
+
+FindInPageRuleDescription=»»When Find in Page has the focus:««
+
+DefaultPageRuleDescription=»»For web pages which do not match any other rule:««
+
+DefaultUIElementRuleDescription=»»When a Browser element that does not match any other rule has the focus:««
+
+DomainRuleDescription=»»For web pages where the domain name ends in:««
+
+#{0}: File path
+#{1}: Error message
+SaveRulesErrorMessage=»»Could not save rules to {0}:\n\n{1}««
+
+IconMenuConfigure=»»Configure...««
+
+IconMenuExit=»»Exit««

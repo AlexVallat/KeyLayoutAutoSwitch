@@ -1,0 +1,10 @@
+﻿mDoNotChange.Text=»»Do not change keyboard layout««
+
+mSetLayout.Text=»»Set keyboard layout to:««
+
+mCancel.Text=»»Cancel««
+
+mOK.Text=»»OK««
+
+#{0}: Name of rule being edited
+$this.Text=»»Edit Rule - {0}««
