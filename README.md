@@ -31,11 +31,11 @@ At present only Firefox is supported, although it is anticipated that support fo
 KeyLayoutAutoSwitch is Windows only. Linux support would be nice to have, but is unlikely to happen soon, unless someone with knowledge of Linux accessibility services and Mono is willing to contribute development work to the project.
 
 ## Translation
-Translations are welcome. To create a new translation, make a copy of all the files in the [`Localisation\qps-ploc`](https://github.com/AlexVallat/KeyLayoutAutoSwitch/KeyLayoutAutoSwitch/Localisation/qps-ploc) folder into a new folder named with the language for the translation. Each .restext file must also be renamed to replace qps-ploc with the language name. For example, `Localisation\ru\Resources.ru.restext`, etc. A GenerateLocale.bat script is provided to automate this process.
+Translations are welcome. To create a new translation, make a copy of all the files in the [`Localisation\qps-ploc`](https://github.com/AlexVallat/KeyLayoutAutoSwitch/tree/master/KeyLayoutAutoSwitch/Localisation/qps-ploc) folder into a new folder named with the language for the translation. Each .restext file must also be renamed to replace qps-ploc with the language name. For example, `Localisation\ru\Resources.ru.restext`, etc. A GenerateLocale.bat script is provided to automate this process.
 
 Then, edit each .restext file to replace the English strings that appear between »» and ««, and remove the »» and «« marks (they are only there to highlight untranslated strings).
 
 Translations may be submitted directly as pull-requests, or by attaching to an issue (and I will handle merging).
 
 ## Donations
-Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using [https://www.paypal.me/toalexv].
+Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
