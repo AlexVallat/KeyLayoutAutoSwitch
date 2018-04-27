@@ -1,5 +1,6 @@
 /.vs
 /packages
+/Releases
 .user
 bin/
 obj/
