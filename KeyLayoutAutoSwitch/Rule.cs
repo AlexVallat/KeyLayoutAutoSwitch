@@ -54,7 +54,7 @@ namespace KeyLayoutAutoSwitch
 			var inputLanguageHandle = (long?)element.Attribute(InputlanguageAttributeName);
 			if (inputLanguageHandle.HasValue)
 			{
-				Language = InputLanguage.InstalledInputLanguages.Cast<InputLanguage>().First(inputLanguage => inputLanguage.Handle.ToInt64() == inputLanguageHandle);
+				Language = InputLanguage.InstalledInputLanguages.Cast<InputLanguage>().FirstOrDefault(inputLanguage => inputLanguage.Handle.ToInt64() == inputLanguageHandle);
 			}
 		}
 
