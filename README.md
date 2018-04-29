@@ -1,6 +1,8 @@
 # KeyLayoutAutoSwitch
 An automatic keyboard layout switcher for web browsers
 
+![KeyLayoutAutoSwitch screenshot](Screenshots/KeyLayoutAutoSwitch.png)
+
 This application aims to replace the old [TabLang](https://addons.mozilla.org/en-US/firefox/addon/tablang/) Add-on for Firefox. It can automatically switch the active input method (Keyboard layout and language) depending on which part of the browser has the focus. It can also switch depending on the url domain of the active tab. Different keyboard layouts can be defined for:
 
 * The Location Bar
@@ -20,6 +22,8 @@ Running KeyLayoutAutoSwitch will show the main configuration window. This can al
 A different keyboard layout may be selected for each element, or any element may be set to "Do not change". If set to "Do not change", then KeyLayoutAutoSwitch will not switch the current keyboard layout when the relevant element is focused; it will remain at whatever it was last set to by any other element, or manually.
 
 Additionally, keyboard layouts may be specified for web pages by domain. To add a new web page rule, click the "Add..." button. The domain for which the rule should apply can then be set. This can be an entire website domain (for example, facebook.com, google.com, etc.) or only the end part of it (for example, .ru, .fr, .co.uk, etc.). The most specific rule will be matched first, so if there is a rule for ".com" to switch to English layout, an addtional rule can be added for "facebook.com" to switch to Russian layout which will override it (as "facebook.com" is more specific than just ".com")
+
+![KeyLayoutAutoSwitch rule editor screenshot](Screenshots/RuleEditor.png)
 
 To exit KeyLayoutAutoSwitch entirely, right click on the notification area icon and choose "Exit". KeyLayoutAutoSwitch will no longer be running in the background, and will not change keyboard layouts until it is next run.
 
