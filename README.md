@@ -25,6 +25,10 @@ Additionally, keyboard layouts may be specified for web pages by domain. To add 
 
 ![KeyLayoutAutoSwitch rule editor screenshot](Screenshots/RuleEditor.png)
 
+There is also a rule called "Previously visited web pages". This can be set to either "Apply all rules normally" (Do not change), or "Restore the last used keyboard layout for the page". If set to restore the last layout, then KeyLayoutAutoSwitch will record the URLs you visit, and the keyboard layout you set for them. When returning to a tab or page, the last-used layout for that page is restored.
+
+Note that the visited URLs are stored hashed, and in memory only. They are never written to disk. If the rules is set to "Apply all rules normally", URL hashes will not be stored at all.
+
 To exit KeyLayoutAutoSwitch entirely, right click on the notification area icon and choose "Exit". KeyLayoutAutoSwitch will no longer be running in the background, and will not change keyboard layouts until it is next run.
 
 ## Limitations
@@ -43,3 +47,10 @@ Translations may be submitted directly as pull-requests, or by attaching to an i
 
 ## Donations
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
+
+## Changelog
+V1.1:
+* Added the "Previously visited web pages" rule
+
+v1.0:
+* Initial Release

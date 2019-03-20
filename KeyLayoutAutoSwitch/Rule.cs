@@ -8,7 +8,7 @@ namespace KeyLayoutAutoSwitch
 {
 	internal abstract class Rule
 	{
-		private const string InputlanguageAttributeName = "inputLanguage";
+		private const string InputLanguageAttributeName = "inputLanguage";
 		private InputLanguage mLanguage;
 
 		public InputLanguage Language
@@ -43,7 +43,7 @@ namespace KeyLayoutAutoSwitch
 			var element = new XElement(ElementName);
 			if (Language != null)
 			{
-				element.Add(new XAttribute(InputlanguageAttributeName, Language.Handle.ToInt64()));
+				element.Add(new XAttribute(InputLanguageAttributeName, Language.Handle.ToInt64()));
 			}
 
 			return element;
@@ -51,7 +51,7 @@ namespace KeyLayoutAutoSwitch
 
 		public virtual void Deserialize(XElement element)
 		{
-			var inputLanguageHandle = (long?)element.Attribute(InputlanguageAttributeName);
+			var inputLanguageHandle = (long?)element.Attribute(InputLanguageAttributeName);
 			if (inputLanguageHandle.HasValue)
 			{
 				Language = InputLanguage.InstalledInputLanguages.Cast<InputLanguage>().FirstOrDefault(inputLanguage => inputLanguage.Handle.ToInt64() == inputLanguageHandle);
@@ -114,6 +114,50 @@ namespace KeyLayoutAutoSwitch
 		{
 			base.Deserialize(element);
 			MatchPageDomainRule = ((bool?)element.Attribute(MatchPageAttributeName)).GetValueOrDefault(false);
+		}
+	}
+
+	internal class PreviouslyVisitedPageRule : Rule
+	{
+		private const string RestorePreviousLayoutAttributeName = "restorePreviousLayout";
+
+		public override string DisplayName => Resources.PreviouslyVisitedPageRule;
+		public override string RuleEditorDescription => Resources.PrevioulsyVisitedPageRuleDescription;
+
+		public bool RestorePreviousLayout { get; set; }
+
+		public override string DisplayLanguage
+		{
+			get
+			{
+				if (RestorePreviousLayout)
+				{
+					return Resources.PreviouslyVisitedPageRestoreLayout;
+				}
+				return base.DisplayLanguage;
+			}
+		}
+
+		public override DialogResult ShowEditorDialog(IWin32Window owner = null)
+		{
+			return new PreviouslyVisitedPageRuleEditor().ShowDialog(this, owner);
+		}
+
+		public override XElement Serialize()
+		{
+			var element = base.Serialize();
+			if (RestorePreviousLayout)
+			{
+				element.Add(new XAttribute(RestorePreviousLayoutAttributeName, true));
+			}
+
+			return element;
+		}
+
+		public override void Deserialize(XElement element)
+		{
+			base.Deserialize(element);
+			RestorePreviousLayout = ((bool?)element.Attribute(RestorePreviousLayoutAttributeName)).GetValueOrDefault(false);
 		}
 	}
 

@@ -168,12 +168,13 @@ namespace KeyLayoutAutoSwitch
 		}
 
 		private string mLastFocusedUrl;
-
+		private readonly Dictionary<int, IntPtr> mPreviousUrlLayouts = new Dictionary<int, IntPtr>();
+		
 		private void OnFocusChanged(IntPtr hwnd, uint idObject, uint idChild)
 		{
 			var className = NativeMethods.GetWindowClassName(hwnd);
 
-			//Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}");
+			//Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}, layout {NativeMethods.GetKeyboardLayout(hwnd)}");
 
 			Browser browser = null;
 			if (className == "MozillaWindowClass")
@@ -190,19 +191,46 @@ namespace KeyLayoutAutoSwitch
 						var focusType = browser.GetFocusType(accessibleObject, out var url);
 						Debug.WriteLine($"Focus on {focusType} with url {url}");
 						//Debug.WriteLine($"Focus on accessible object: {accessibleObject.accName[0]} ({AccessibleObjectHelper.GetRole(accessibleObject)})");
-
+						
 						// If the URL hasn't changed (and it's a URL-based focus) then don't re-apply the keyboard layout
 						if (url == null || url != mLastFocusedUrl)
 						{
-							
-							var rule = Rules.Instance.GetApplicableRule(focusType, url);
-
-							if (rule.Language != null)
+							if (mLastFocusedUrl != null && Rules.Instance.RestorePreviouslyVisitedPageLayouts)
 							{
-								Debug.WriteLine($"Sending switch to language {rule.DisplayLanguage}");
-								NativeMethods.SwitchKeyboardLayout(hwnd, rule.Language.Handle);
-								mLastFocusedUrl = url;
+								// Leaving this URL, so store the current layout that it uses so it can be restored
+
+								// If the layout is the same as the one specified by rule, then don't bother recording it
+								var ruleLayoutForLastUrl = Rules.Instance.GetApplicableRule(FocusType.Page, mLastFocusedUrl).Language?.Handle ?? IntPtr.Zero;
+
+								var currentLayout = NativeMethods.GetKeyboardLayout(hwnd);
+								Debug.Assert(currentLayout != IntPtr.Zero, "Unable to get current keyboard layout");
+								if (currentLayout != IntPtr.Zero && currentLayout != ruleLayoutForLastUrl)
+								{
+									Debug.WriteLine($"Stored previous layout for {mLastFocusedUrl}: {currentLayout}");
+									mPreviousUrlLayouts[mLastFocusedUrl.GetHashCode()] = currentLayout;
+								}
 							}
+							
+							// Attempt to look up the previous layout for this url
+							if (url != null &&  Rules.Instance.RestorePreviouslyVisitedPageLayouts &&
+								mPreviousUrlLayouts.TryGetValue(url.GetHashCode(), out var previousLayout))
+							{
+								mPreviousUrlLayouts.Remove(url.GetHashCode());
+								Debug.WriteLine($"Restoring previous layout for {url}: {previousLayout}");
+								NativeMethods.SwitchKeyboardLayout(hwnd, previousLayout);
+							}
+							else
+							{
+								// No previous layout, so apply rule-based layout
+								var rule = Rules.Instance.GetApplicableRule(focusType, url);
+
+								if (rule.Language != null)
+								{
+									Debug.WriteLine($"Sending switch to language {rule.DisplayLanguage}");
+									NativeMethods.SwitchKeyboardLayout(hwnd, rule.Language.Handle);
+								}
+							}
+							mLastFocusedUrl = url;
 						}
 					}
 				}

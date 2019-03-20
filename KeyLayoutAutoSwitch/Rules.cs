@@ -19,6 +19,7 @@ namespace KeyLayoutAutoSwitch
 		private static readonly string FilePath = Path.Combine(DirectoryPath, RulesFileName);
 
 
+		private readonly PreviouslyVisitedPageRule mPreviouslyVisitedPageRule = new PreviouslyVisitedPageRule();
 		private readonly List<DomainRule> mDomainRules = new List<DomainRule>();
 		private readonly DefaultPageRule mDefaultPageRule = new DefaultPageRule();
 		private readonly FindInPageRule mFindInPageRule = new FindInPageRule();
@@ -32,6 +33,8 @@ namespace KeyLayoutAutoSwitch
 
 		public IEnumerable<Rule> GetAllRules()
 		{
+			yield return mPreviouslyVisitedPageRule;
+
 			foreach (var domainRule in mDomainRules.OrderByDescending(r => r.DomainSuffix.Length))
 			{
 				yield return domainRule;
@@ -74,6 +77,8 @@ namespace KeyLayoutAutoSwitch
 					return mDefaultUIElementRule;
 			}
 		}
+
+		public bool RestorePreviouslyVisitedPageLayouts => mPreviouslyVisitedPageRule.RestorePreviousLayout;
 
 		private Rule GetDomainRule(string urlString)
 		{

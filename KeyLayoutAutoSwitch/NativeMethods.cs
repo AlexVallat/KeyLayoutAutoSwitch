@@ -28,6 +28,12 @@ namespace KeyLayoutAutoSwitch
 		private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, int wParam, IntPtr lParam);
 		private const uint WM_INPUTLANGCHANGEREQUEST = 0x0050;
 
+		[DllImport("user32.dll")]
+		private static extern IntPtr GetKeyboardLayout(uint idThread);
+
+		[DllImport("user32.dll")]
+		private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
+
 		public delegate void FocusEvent(IntPtr hwnd, uint idObject, uint idChild);
 
 		public static IDisposable AddFocusEventHook(FocusEvent eventHandler)
@@ -91,6 +97,16 @@ namespace KeyLayoutAutoSwitch
 		public static void SwitchKeyboardLayout(IntPtr hWnd, IntPtr hklInputMethod)
 		{
 			SendMessage(hWnd, WM_INPUTLANGCHANGEREQUEST, 0, hklInputMethod);
+		}
+
+		public static IntPtr GetKeyboardLayout(IntPtr hWnd)
+		{
+			var threadId = GetWindowThreadProcessId(hWnd, IntPtr.Zero);
+			if (threadId != 0)
+			{
+				return GetKeyboardLayout(threadId);
+			}
+			return IntPtr.Zero;
 		}
 	}
 }

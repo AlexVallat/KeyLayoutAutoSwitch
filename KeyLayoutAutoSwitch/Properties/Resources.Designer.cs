@@ -215,6 +215,33 @@ namespace KeyLayoutAutoSwitch.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When a web page has previously been visited, and a different keyboard layout was manually switched to for it:.
+        /// </summary>
+        internal static string PrevioulsyVisitedPageRuleDescription {
+            get {
+                return ResourceManager.GetString("PrevioulsyVisitedPageRuleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore last used keyboard layout.
+        /// </summary>
+        internal static string PreviouslyVisitedPageRestoreLayout {
+            get {
+                return ResourceManager.GetString("PreviouslyVisitedPageRestoreLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously visited web pages.
+        /// </summary>
+        internal static string PreviouslyVisitedPageRule {
+            get {
+                return ResourceManager.GetString("PreviouslyVisitedPageRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not save rules to {0}:
         ///
         ///{1}.

@@ -10,6 +10,8 @@ DefaultPageRule=»»Other web pages««
 
 DefaultUIElementRule=»»Other Browser controls««
 
+PreviouslyVisitedPageRule=»»Previously visited web pages««
+
 #{0}: Domain suffix
 DomainRule=»»{0} web pages««
 
@@ -18,6 +20,8 @@ DomainRule=»»{0} web pages««
 LanguageDisplayFormat=»»{0} / {1}««
 
 FindInPageMatchWebPage=»»Match web page setting««
+
+PreviouslyVisitedPageRestoreLayout=»»Restore previously set layout««
 
 LanguageDoNotChange=»»Do not change««
 
@@ -30,6 +34,8 @@ FindInPageRuleDescription=»»When Find in Page has the focus:««
 DefaultPageRuleDescription=»»For web pages which do not match any other rule:««
 
 DefaultUIElementRuleDescription=»»When a Browser element that does not match any other rule has the focus:««
+
+PrevioulsyVisitedPageRuleDescription=»»When a web page has previously been visited, and a different keyboard layout was manually switched to for it:««
 
 DomainRuleDescription=»»For web pages where the domain name ends in:««
 
