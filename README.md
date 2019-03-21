@@ -16,6 +16,8 @@ KeyLayoutAutoSwitch is not an Add-on. Firefox no longer supports the technical r
 
 [Download Installer](https://github.com/AlexVallat/KeyLayoutAutoSwitch/releases/latest)
 
+Some web sites, notably Google Docs, set a custom Aria document role on their pages. This prevents Firefox from reporting the URL for them through accessibility services. Most sites do not exhibit this problem, but if the ones you use do, then you can install the [Prevent Custom Document Role](https://addons.mozilla.org/firefox/addon/prevent-custom-document-role/) addon to work around the issue.
+
 ## Usage
 Running KeyLayoutAutoSwitch will show the main configuration window. This can also be shown by double clicking on the icon in the notification area of the taskbar. In this window, the keyboard layout to use for each browser element can be set by selecting the relevant entry in the list and clicking the Edit button.
 

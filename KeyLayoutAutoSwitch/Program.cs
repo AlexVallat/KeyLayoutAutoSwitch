@@ -169,7 +169,24 @@ namespace KeyLayoutAutoSwitch
 
 		private string mLastFocusedUrl;
 		private readonly Dictionary<int, IntPtr> mPreviousUrlLayouts = new Dictionary<int, IntPtr>();
-		
+
+		private bool TryGetPreviousUrlLayout(string url, out IntPtr layout)
+		{
+			var result = mPreviousUrlLayouts.TryGetValue(url.GetHashCode(), out layout);
+			if (result)
+			{
+				Debug.WriteLine($"Restoring previous layout for {url}: {layout}");
+			}
+
+			return result;
+		}
+
+		private void SetPreviousUrlLayout(string url, IntPtr layout)
+		{
+			mPreviousUrlLayouts[url.GetHashCode()] = layout;
+			Debug.WriteLine($"Stored previous layout for {url}: {layout}");
+		}
+
 		private void OnFocusChanged(IntPtr hwnd, uint idObject, uint idChild)
 		{
 			var className = NativeMethods.GetWindowClassName(hwnd);
@@ -188,7 +205,9 @@ namespace KeyLayoutAutoSwitch
 					var accessibleObject = NativeMethods.GetAccessibleFromEvent(hwnd, idObject, idChild);
 					if (accessibleObject != null)
 					{
-						var focusType = browser.GetFocusType(accessibleObject, out var url);
+						var focusType = browser.GetFocusType(accessibleObject, out var fullUrl);
+						var url = new Uri(fullUrl).GetLeftPart(UriPartial.Path); // Ignore query and anchor parts of the URL
+
 						Debug.WriteLine($"Focus on {focusType} with url {url}");
 						//Debug.WriteLine($"Focus on accessible object: {accessibleObject.accName[0]} ({AccessibleObjectHelper.GetRole(accessibleObject)})");
 						
@@ -206,17 +225,15 @@ namespace KeyLayoutAutoSwitch
 								Debug.Assert(currentLayout != IntPtr.Zero, "Unable to get current keyboard layout");
 								if (currentLayout != IntPtr.Zero && currentLayout != ruleLayoutForLastUrl)
 								{
-									Debug.WriteLine($"Stored previous layout for {mLastFocusedUrl}: {currentLayout}");
-									mPreviousUrlLayouts[mLastFocusedUrl.GetHashCode()] = currentLayout;
+									SetPreviousUrlLayout(mLastFocusedUrl, currentLayout);
 								}
 							}
 							
 							// Attempt to look up the previous layout for this url
 							if (url != null &&  Rules.Instance.RestorePreviouslyVisitedPageLayouts &&
-								mPreviousUrlLayouts.TryGetValue(url.GetHashCode(), out var previousLayout))
+								TryGetPreviousUrlLayout(url, out var previousLayout))
 							{
 								mPreviousUrlLayouts.Remove(url.GetHashCode());
-								Debug.WriteLine($"Restoring previous layout for {url}: {previousLayout}");
 								NativeMethods.SwitchKeyboardLayout(hwnd, previousLayout);
 							}
 							else
