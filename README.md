@@ -51,7 +51,10 @@ Translations may be submitted directly as pull-requests, or by attaching to an i
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
 ## Changelog
-V1.1:
+v1.2:
+* Updated compatibility with latest Firefox
+
+v1.1:
 * Added the "Previously visited web pages" rule
 
 v1.0:

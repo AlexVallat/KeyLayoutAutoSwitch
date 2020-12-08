@@ -71,7 +71,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			var result = Parser.Default.ParseArguments<CommandLineArgs>(args);
 			if (result.Tag == ParserResultType.NotParsed)
-			{ 
+			{
 				var helpText = HelpText.AutoBuild(result, 200);
 				MessageBox.Show(helpText, Resources.ApplicationName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -139,11 +139,11 @@ namespace KeyLayoutAutoSwitch
 				Text = Resources.ApplicationName,
 				ContextMenuStrip = new ContextMenuStrip(),
 			};
-			
+
 			mNotifyIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[]
 			{
 				new ToolStripMenuItem(Resources.IconMenuConfigure, null, OnConfigure),
-				new ToolStripSeparator(), 
+				new ToolStripSeparator(),
 				new ToolStripMenuItem(Resources.IconMenuExit, null, OnExit),
 			});
 
@@ -206,11 +206,11 @@ namespace KeyLayoutAutoSwitch
 					if (accessibleObject != null)
 					{
 						var focusType = browser.GetFocusType(accessibleObject, out var fullUrl);
-						var url = new Uri(fullUrl).GetLeftPart(UriPartial.Path); // Ignore query and anchor parts of the URL
+						var url = fullUrl == null ? null : new Uri(fullUrl).GetLeftPart(UriPartial.Path); // Ignore query and anchor parts of the URL
 
 						Debug.WriteLine($"Focus on {focusType} with url {url}");
 						//Debug.WriteLine($"Focus on accessible object: {accessibleObject.accName[0]} ({AccessibleObjectHelper.GetRole(accessibleObject)})");
-						
+
 						// If the URL hasn't changed (and it's a URL-based focus) then don't re-apply the keyboard layout
 						if (url == null || url != mLastFocusedUrl)
 						{
@@ -228,7 +228,7 @@ namespace KeyLayoutAutoSwitch
 									SetPreviousUrlLayout(mLastFocusedUrl, currentLayout);
 								}
 							}
-							
+
 							// Attempt to look up the previous layout for this url
 							if (url != null &&  Rules.Instance.RestorePreviouslyVisitedPageLayouts &&
 								TryGetPreviousUrlLayout(url, out var previousLayout))

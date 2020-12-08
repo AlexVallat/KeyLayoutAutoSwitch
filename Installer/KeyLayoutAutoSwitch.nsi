@@ -29,7 +29,7 @@ InstallDirRegKey HKLM "${INSTALL_DIR_REGKEY}" ""
 Section "KeyLayoutAutoSwitch Program Files" SecCore
 	SectionIn RO
 	SetOutPath "$INSTDIR"
-	!insertmacro CheckNetFramework 461
+	!insertmacro CheckNetFramework 472
 	
 	File "${SOURCE_PATH}\${EXE_FILENAME}"
 	File "${SOURCE_PATH}\CommandLine.dll"

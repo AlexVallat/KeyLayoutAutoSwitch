@@ -22,7 +22,7 @@ namespace KeyLayoutAutoSwitch
 					{
 						if (AccessibleObjectHelper.GetRole(immediateParent) == AccessibleRole.ComboBox)
 						{
-							if (immediateParent.accChildCount > 2)
+							if (AccessibleObjectHelper.HasState(accessibleObject, AccessibleStates.HasPopup))
 							{
 								return FocusType.Location;
 							}

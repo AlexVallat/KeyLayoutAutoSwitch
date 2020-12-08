@@ -1,6 +1,6 @@
 /.vs
 /packages
 /Releases
-.user
+*.user
 bin/
 obj/
