@@ -37,8 +37,7 @@ namespace KeyLayoutAutoSwitch
 							if (propertyPage != null && AccessibleObjectHelper.GetRole(propertyPage) == AccessibleRole.PropertyPage)
 							{
 								// Get URL for page
-								var document = AccessibleObjectHelper.FindChild(AccessibleObjectHelper.FindChild(propertyPage,
-													customRole: "browser"),
+								var document = AccessibleObjectHelper.FindChild(AccessibleObjectHelper.FindChild(propertyPage),
 														role: AccessibleRole.Document);
 								if (document != null)
 								{
