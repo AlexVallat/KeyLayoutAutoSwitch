@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AccessibleObjectHelper.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="PreviouslyVisitedPageRuleEditor.cs">
       <SubType>Form</SubType>
     </Compile>

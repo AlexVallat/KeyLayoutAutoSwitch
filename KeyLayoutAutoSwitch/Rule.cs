@@ -19,7 +19,7 @@ namespace KeyLayoutAutoSwitch
 				if (mLanguage != value)
 				{
 					mLanguage = value;
-					DisplayLanguage = mLanguage == null ? Resources.LanguageDoNotChange : String.Format(Resources.LanguageDisplayFormat, Language.Culture.DisplayName, Language.LayoutName);
+					DisplayLanguage = mLanguage == null ? Resources.LanguageDoNotChange : String.Format(Resources.LanguageDisplayFormat, Language.Culture.DisplayName, Language.GetLayoutName());
 				}
 			}
 		}

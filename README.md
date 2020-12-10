@@ -53,6 +53,7 @@ Donations are very welcome, and may be made through PayPal by using the [Donate]
 ## Changelog
 v1.2:
 * Updated compatibility with latest Firefox
+* Fix mis-labelling of multiple language layouts for the same language
 
 v1.1:
 * Added the "Previously visited web pages" rule

@@ -11,7 +11,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			InitializeComponent();
 
-			mColumn.AspectGetter = o => ((InputLanguage)o).LayoutName;
+			mColumn.AspectGetter = o => ((InputLanguage)o).GetLayoutName();
 			mColumn.GroupKeyGetter = o => ((InputLanguage)o).Culture.DisplayName;
 			mColumn.CellPadding = new Rectangle(20,0,0,0);
 
