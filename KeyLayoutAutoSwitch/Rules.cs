@@ -10,14 +10,13 @@ using KeyLayoutAutoSwitch.Properties;
 
 namespace KeyLayoutAutoSwitch
 {
-	internal class Rules
+	internal sealed class Rules
 	{
 		private const string AppDataFolder = "KeyLayoutAutoSwitch";
 		private const string RulesFileName = "Rules.xml";
 
 		private static readonly string DirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDataFolder);
 		private static readonly string FilePath = Path.Combine(DirectoryPath, RulesFileName);
-
 
 		private readonly PreviouslyVisitedPageRule mPreviouslyVisitedPageRule = new PreviouslyVisitedPageRule();
 		private readonly List<DomainRule> mDomainRules = new List<DomainRule>();
@@ -78,7 +77,9 @@ namespace KeyLayoutAutoSwitch
 			}
 		}
 
-		public bool RestorePreviouslyVisitedPageLayouts => mPreviouslyVisitedPageRule.RestorePreviousLayout;
+#pragma warning disable RCS1085 // Use auto-implemented property: Consistency with other rules
+		public PreviouslyVisitedPageRule PreviouslyVisitedPageRule => mPreviouslyVisitedPageRule;
+#pragma warning restore RCS1085
 
 		private Rule GetDomainRule(string urlString)
 		{

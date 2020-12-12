@@ -1,3 +1,4 @@
 ﻿mDoNotChange.Text=»»Apply all rules normally««
 mRestorePreviousLayout.Text=»»Restore the last used keyboard layout for the page««
+mRestorePreviousLayoutForSite.Text=»»Restore the last used keyboard layout for the whole site««
 $this.Text=»»Edit Rule - Previously visited web pages««

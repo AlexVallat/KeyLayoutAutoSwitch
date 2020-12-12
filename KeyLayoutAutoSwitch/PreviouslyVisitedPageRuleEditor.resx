@@ -121,6 +121,10 @@
   <data name="mInputMethods.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mInputMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>363, 142</value>
+  </data>
   <data name="mInputMethods.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -134,11 +138,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mInputMethods.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mDoNotChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 87</value>
+    <value>16, 110</value>
   </data>
   <data name="mDoNotChange.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 19</value>
@@ -174,7 +177,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mSetLayout.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="mDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 10</value>
@@ -192,7 +195,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mDescription.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="mRestorePreviousLayout.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -223,6 +226,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mRestorePreviousLayout.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 84</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 19</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mRestorePreviousLayoutForSite.Text" xml:space="preserve">
+    <value>Restore the last used keyboard layout for the whole site</value>
+  </data>
+  <data name="&gt;&gt;mRestorePreviousLayoutForSite.Name" xml:space="preserve">
+    <value>mRestorePreviousLayoutForSite</value>
+  </data>
+  <data name="&gt;&gt;mRestorePreviousLayoutForSite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mRestorePreviousLayoutForSite.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mRestorePreviousLayoutForSite.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -232,12 +265,12 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 120</value>
+    <value>529, 154</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PreviouslyVisitedPageRuleEditor</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>KeyLayoutAutoSwitch.RuleEditor, KeyLayoutAutoSwitch, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>KeyLayoutAutoSwitch.RuleEditor, KeyLayoutAutoSwitch, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

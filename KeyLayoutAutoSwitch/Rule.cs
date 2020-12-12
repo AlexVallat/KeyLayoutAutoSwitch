@@ -37,7 +37,6 @@ namespace KeyLayoutAutoSwitch
 			return new RuleEditor().ShowDialog(this, owner);
 		}
 
-
 		public virtual XElement Serialize()
 		{
 			var element = new XElement(ElementName);
@@ -113,18 +112,35 @@ namespace KeyLayoutAutoSwitch
 		public override void Deserialize(XElement element)
 		{
 			base.Deserialize(element);
-			MatchPageDomainRule = ((bool?)element.Attribute(MatchPageAttributeName)).GetValueOrDefault(false);
+			MatchPageDomainRule = ((bool?)element.Attribute(MatchPageAttributeName)) ?? false;
 		}
 	}
 
 	internal class PreviouslyVisitedPageRule : Rule
 	{
 		private const string RestorePreviousLayoutAttributeName = "restorePreviousLayout";
+		private const string ApplyToSiteAttributeName = "applyToSite";
 
 		public override string DisplayName => Resources.PreviouslyVisitedPageRule;
 		public override string RuleEditorDescription => Resources.PrevioulsyVisitedPageRuleDescription;
 
 		public bool RestorePreviousLayout { get; set; }
+
+		public bool ApplyToSite { get; set; }
+
+		public string GetApplicableUrl(string urlString)
+		{
+			if (ApplyToSite && Uri.TryCreate(urlString, UriKind.Absolute, out var uri))
+			{
+				return uri.Host;
+			}
+			return urlString;
+		}
+
+		public string GetRuleNameForUrl(string url)
+		{
+			return ApplyToSite ? String.Format(Resources.PreviouslyVisitedPageRuleNameSite, GetApplicableUrl(url)) : Resources.PreviouslyVisitedPageRuleNamePage;
+		}
 
 		public override string DisplayLanguage
 		{
@@ -132,7 +148,7 @@ namespace KeyLayoutAutoSwitch
 			{
 				if (RestorePreviousLayout)
 				{
-					return Resources.PreviouslyVisitedPageRestoreLayout;
+					return ApplyToSite ? Resources.PreviouslyVisitedPageRestoreLayoutForSite : Resources.PreviouslyVisitedPageRestoreLayout;
 				}
 				return base.DisplayLanguage;
 			}
@@ -150,6 +166,10 @@ namespace KeyLayoutAutoSwitch
 			{
 				element.Add(new XAttribute(RestorePreviousLayoutAttributeName, true));
 			}
+			if (ApplyToSite)
+			{
+				element.Add(new XAttribute(ApplyToSiteAttributeName, true));
+			}
 
 			return element;
 		}
@@ -157,7 +177,8 @@ namespace KeyLayoutAutoSwitch
 		public override void Deserialize(XElement element)
 		{
 			base.Deserialize(element);
-			RestorePreviousLayout = ((bool?)element.Attribute(RestorePreviousLayoutAttributeName)).GetValueOrDefault(false);
+			RestorePreviousLayout = ((bool?)element.Attribute(RestorePreviousLayoutAttributeName)) ?? false;
+			ApplyToSite = ((bool?)element.Attribute(ApplyToSiteAttributeName)) ?? false;
 		}
 	}
 
@@ -191,7 +212,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			var element = base.Serialize();
 			element.Add(new XAttribute(DomainAttributeName, DomainSuffix));
-		
+
 			return element;
 		}
 

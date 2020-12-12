@@ -169,6 +169,15 @@ namespace KeyLayoutAutoSwitch.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Previously Visited.
+        /// </summary>
+        internal static string IconMenuResetPreviouslyVisited {
+            get {
+                return ResourceManager.GetString("IconMenuResetPreviouslyVisited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon LanguageBar {
@@ -233,11 +242,38 @@ namespace KeyLayoutAutoSwitch.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore last used keyboard layout for site.
+        /// </summary>
+        internal static string PreviouslyVisitedPageRestoreLayoutForSite {
+            get {
+                return ResourceManager.GetString("PreviouslyVisitedPageRestoreLayoutForSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previously visited web pages.
         /// </summary>
         internal static string PreviouslyVisitedPageRule {
             get {
                 return ResourceManager.GetString("PreviouslyVisitedPageRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously visited page.
+        /// </summary>
+        internal static string PreviouslyVisitedPageRuleNamePage {
+            get {
+                return ResourceManager.GetString("PreviouslyVisitedPageRuleNamePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously visited site: {0}.
+        /// </summary>
+        internal static string PreviouslyVisitedPageRuleNameSite {
+            get {
+                return ResourceManager.GetString("PreviouslyVisitedPageRuleNameSite", resourceCulture);
             }
         }
         
@@ -267,6 +303,15 @@ namespace KeyLayoutAutoSwitch.Properties {
         internal static string SearchBarRuleDescription {
             get {
                 return ResourceManager.GetString("SearchBarRuleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switched to &apos;{0}&apos; by rule: {1}.
+        /// </summary>
+        internal static string SwitchTooltip {
+            get {
+                return ResourceManager.GetString("SwitchTooltip", resourceCulture);
             }
         }
     }

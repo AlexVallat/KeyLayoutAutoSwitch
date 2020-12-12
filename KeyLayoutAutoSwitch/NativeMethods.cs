@@ -18,13 +18,13 @@ namespace KeyLayoutAutoSwitch
 		[DllImport("user32.dll")]
 		static extern bool UnhookWinEvent(IntPtr hWinEventHook);
 
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 		private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
 		[DllImport("oleacc.dll")]
 		private static extern uint AccessibleObjectFromEvent(IntPtr hwnd, uint dwObjectID, uint dwChildID, out IAccessible ppacc, [MarshalAs(UnmanagedType.Struct)] out object pvarChild);
 
-		[DllImport("user32.dll", CharSet = CharSet.Auto)]
+		[DllImport("user32.dll", CharSet = CharSet.Unicode)]
 		private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, int wParam, IntPtr lParam);
 		private const uint WM_INPUTLANGCHANGEREQUEST = 0x0050;
 

@@ -27,9 +27,9 @@ Additionally, keyboard layouts may be specified for web pages by domain. To add 
 
 ![KeyLayoutAutoSwitch rule editor screenshot](Screenshots/RuleEditor.png)
 
-There is also a rule called "Previously visited web pages". This can be set to either "Apply all rules normally" (Do not change), or "Restore the last used keyboard layout for the page". If set to restore the last layout, then KeyLayoutAutoSwitch will record the URLs you visit, and the keyboard layout you set for them. When returning to a tab or page, the last-used layout for that page is restored.
+There is also a rule called "Previously visited web pages". This can be set to "Apply all rules normally" (Do not change), "Restore the last used keyboard layout for the page", or "Restore last used keyboard layout for the whole site". If set to restore the last layout, then KeyLayoutAutoSwitch will record the URLs you visit, and the keyboard layout you set for them. When returning to a tab or page, the last-used layout for that page is restored. If the option for the whole site is selected, then the same last-used layout applies to all pages under the same domain.
 
-Note that the visited URLs are stored hashed, and in memory only. They are never written to disk. If the rules is set to "Apply all rules normally", URL hashes will not be stored at all.
+Note that the visited URLs are stored hashed, and in memory only. They are never written to disk. If the rules is set to "Apply all rules normally", URL hashes will not be stored at all. To immediately forget all stored visited URLs, use the menu command "Clear Previously Visited".
 
 To exit KeyLayoutAutoSwitch entirely, right click on the notification area icon and choose "Exit". KeyLayoutAutoSwitch will no longer be running in the background, and will not change keyboard layouts until it is next run.
 
@@ -51,6 +51,11 @@ Translations may be submitted directly as pull-requests, or by attaching to an i
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
 ## Changelog
+v1.3:
+* Added new option to Previously visited web pages rule, to apply the last used keyboard layout for the whole site (domain)
+* Added context menu command to clear the previously visited web pages, forgetting all last used layouts
+* Added tooltip to the icon which indicates why the current keyboard layout has been chosen
+
 v1.2:
 * Updated compatibility with latest Firefox
 * Fix mis-labelling of multiple language layouts for the same language

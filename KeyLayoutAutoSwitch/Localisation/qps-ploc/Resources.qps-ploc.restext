@@ -21,7 +21,9 @@ LanguageDisplayFormat=»»{0} / {1}««
 
 FindInPageMatchWebPage=»»Match web page setting««
 
-PreviouslyVisitedPageRestoreLayout=»»Restore previously set layout««
+PreviouslyVisitedPageRestoreLayout=»»Restore last used keyboard layout««
+
+PreviouslyVisitedPageRestoreLayoutForSite=»»Restore last used keyboard layout for site««
 
 LanguageDoNotChange=»»Do not change««
 
@@ -46,3 +48,10 @@ SaveRulesErrorMessage=»»Could not save rules to {0}:\n\n{1}««
 IconMenuConfigure=»»Configure...««
 
 IconMenuExit=»»Exit««
+
+IconMenuResetPreviouslyVisited=»»Clear Previously Visited««
+
+SwitchTooltip=»»Switched to '{0}' by rule: {1}««
+
+PreviouslyVisitedPageRuleNameSite=»»Previously visited site: {0}««
+PreviouslyVisitedPageRuleNamePage=»»Previously visited page««

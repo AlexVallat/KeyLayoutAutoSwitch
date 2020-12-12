@@ -23,8 +23,7 @@ namespace KeyLayoutAutoSwitch
 				{
 					using (var keyboardLayoutKey = keyboardLayouts.OpenSubKey(keyboardLayout))
 					{
-						var layoutId = keyboardLayoutKey.GetValue("Layout Id") as string;
-						if (layoutId != null)
+						if (keyboardLayoutKey.GetValue("Layout Id") is string layoutId)
 						{
 							layoutKeyNames[Convert.ToUInt32(layoutId, 16)] = keyboardLayout;
 						}
@@ -37,34 +36,39 @@ namespace KeyLayoutAutoSwitch
 
 		public static string GetLayoutName(this InputLanguage inputLanguage)
 		{
-			if (!_layoutNameCache.TryGetValue(inputLanguage.Handle, out var layoutName))
+			// InputLanguage.LayoutName is bugged (https://github.com/dotnet/winforms/issues/4345), try to do better
+			try
 			{
-				// InputLanguage.LayoutName is bugged (https://github.com/dotnet/winforms/issues/4345), try to do better
-				try
-				{
-					var targetLayoutIdOrLanguage = (uint)inputLanguage.Handle >> 16;
+				return GetKeyboardLayoutName(inputLanguage.Handle) ?? inputLanguage.LayoutName;
+			}
+			catch
+			{
+				// Fallback on the buggy WinForms implemenation
+				return inputLanguage.LayoutName;
+			}
+		}
 
-					var keyName = (targetLayoutIdOrLanguage & 0xf000) == 0xf000 ?
-							// This is a layout ID, so get the key name from the lookup
-							_layoutKeyNamesByLayoutId[targetLayoutIdOrLanguage & 0x0fff]
-						:
-							// This is a language ID, the layout name is just that.
-							targetLayoutIdOrLanguage.ToString("X8");
+		public static string GetKeyboardLayoutName(this IntPtr layoutHandle)
+		{
+			if (!_layoutNameCache.TryGetValue(layoutHandle, out var layoutName))
+			{
+				var targetLayoutIdOrLanguage = (uint)layoutHandle >> 16;
 
-					using (var keyboardLayoutKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layouts\" + keyName))
-					{
-						// Attempt to extract the localized keyboard layout name, default back to legacy name from registry, final default just use InputLanguage code path
-						layoutName = GetLocalizedKeyboardLayoutName(keyboardLayoutKey.GetValue("Layout Display Name") as string)
-										?? keyboardLayoutKey.GetValue("Layout Text") as string
-										?? inputLanguage.LayoutName;
-					}
-				}
-				catch
+				var keyName = (targetLayoutIdOrLanguage & 0xf000) == 0xf000 ?
+						// This is a layout ID, so get the key name from the lookup
+						_layoutKeyNamesByLayoutId[targetLayoutIdOrLanguage & 0x0fff]
+					:
+						// This is a language ID, the layout name is just that.
+						targetLayoutIdOrLanguage.ToString("X8");
+
+				using (var keyboardLayoutKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layouts\" + keyName))
 				{
-					// Fallback on the buggy WinForms implemenation
-					layoutName = inputLanguage.LayoutName;
+					// Attempt to extract the localized keyboard layout name, default back to legacy name from registry, final default just use InputLanguage code path
+					layoutName = GetLocalizedKeyboardLayoutName(keyboardLayoutKey.GetValue("Layout Display Name") as string)
+									?? keyboardLayoutKey.GetValue("Layout Text") as string;
 				}
-				_layoutNameCache.Add(inputLanguage.Handle, layoutName);
+
+				_layoutNameCache.Add(layoutHandle, layoutName);
 			}
 
 			return layoutName;
@@ -73,6 +77,20 @@ namespace KeyLayoutAutoSwitch
 		private static string GetLocalizedKeyboardLayoutName(string layoutDisplayName)
 		{
 			return GetLocalizedKeyboardLayoutNameMethod?.Invoke(null, new[] { layoutDisplayName }) as string;
+		}
+
+		/// <summary>
+		/// <see cref="NotifyIcon.Text"/> is limited to 63 characters, but on Windows 2000 and above the real limit is 127 characters
+		/// </summary>
+		/// <param name="notifyIcon"></param>
+		public static void SetText(this NotifyIcon notifyIcon, string text)
+		{
+			if (text.Length > 127)
+			{
+				text = text.Substring(0, 126) + "…";
+			}
+			typeof(NotifyIcon).GetField("text", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(notifyIcon, text);
+			typeof(NotifyIcon).GetMethod("UpdateIcon", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(notifyIcon, new object[] { true });
 		}
 	}
 }

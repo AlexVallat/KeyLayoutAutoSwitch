@@ -17,8 +17,7 @@ namespace KeyLayoutAutoSwitch
 				if (role == AccessibleRole.ToolBar)
 				{
 					// This is on the toolbar, so either location box or search box
-					var immediateParent = accessibleObject.accParent as IAccessible;
-					if (immediateParent != null)
+					if (accessibleObject.accParent is IAccessible immediateParent)
 					{
 						if (AccessibleObjectHelper.GetRole(immediateParent) == AccessibleRole.ComboBox)
 						{
@@ -33,8 +32,8 @@ namespace KeyLayoutAutoSwitch
 						}
 						else
 						{
-							var propertyPage = parent.accParent as IAccessible;
-							if (propertyPage != null && AccessibleObjectHelper.GetRole(propertyPage) == AccessibleRole.PropertyPage)
+							if (parent.accParent is IAccessible propertyPage &&
+								AccessibleObjectHelper.GetRole(propertyPage) == AccessibleRole.PropertyPage)
 							{
 								// Get URL for page
 								var document = AccessibleObjectHelper.FindChild(AccessibleObjectHelper.FindChild(propertyPage),
