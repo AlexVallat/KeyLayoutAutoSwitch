@@ -241,12 +241,20 @@ namespace KeyLayoutAutoSwitch
 		{
 			var className = NativeMethods.GetWindowClassName(hwnd);
 
-			//Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}, layout {NativeMethods.GetKeyboardLayout(hwnd)}");
+			Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}, layout {NativeMethods.GetKeyboardLayout(hwnd)}");
 
 			Browser browser = null;
-			if (className == "MozillaWindowClass")
+			switch (className)
 			{
-				browser = new Firefox();
+				case "MozillaWindowClass":
+					browser = new Firefox();
+					break;
+				case "Chrome_RenderWidgetHostHWND":
+					browser = new Chrome();
+					break;
+				case "Chrome_WidgetWin_1":
+					browser = new ChromeWidgets();
+					break;
 			}
 			if (browser != null)
 			{

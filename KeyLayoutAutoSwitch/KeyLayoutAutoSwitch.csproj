@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="AccessibleObjectHelper.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="ChromeWidgets.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Chrome.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PreviouslyVisitedPageRuleEditor.cs">
       <SubType>Form</SubType>
