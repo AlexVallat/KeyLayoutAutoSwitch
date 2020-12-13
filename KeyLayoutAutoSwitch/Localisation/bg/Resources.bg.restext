@@ -1,0 +1,59 @@
+﻿ApplicationName=Keyboard Layout Auto Switch
+
+LocationBarRule=Адресна лента
+
+SearchBarRule=Лента за търсене
+
+FindInPageRule=Търси в страницата
+
+DefaultPageRule=Други уеб страници
+
+DefaultUIElementRule=Други части на браузъра
+
+PreviouslyVisitedPageRule=Предишно посетени уеб страници
+
+#{0}: Domain suffix
+DomainRule={0} уеб страници
+
+#{0}: Culture Name
+#{1}: Keyboard Layout Name
+LanguageDisplayFormat={0} / {1}
+
+FindInPageMatchWebPage=Като настройката за уеб страницата
+
+PreviouslyVisitedPageRestoreLayout=Възстанови последно използваната клавиатурна подредба
+
+PreviouslyVisitedPageRestoreLayoutForSite=Възстанови последно използваната клавиатурна подредба за сайта
+
+LanguageDoNotChange=Не променяй
+
+LocationBarRuleDescription=Когато фокуса е на Адресна лента:
+
+SearchBarRuleDescription=Когато фокуса е на Лента за търсене:
+
+FindInPageRuleDescription=Когато фокуса е на Търси в страницата:
+
+DefaultPageRuleDescription=За уеб страници, които не отговарят на никое друго правило:
+
+DefaultUIElementRuleDescription=Когато фокуса е на част от браузъра, която не отговаря на никое друго правило:
+
+PrevioulsyVisitedPageRuleDescription=Когато уеб страница е била посетена преди и ръчно е била избрана друга клавиатурна подредба за нея:
+
+DomainRuleDescription=За уеб страници, чийто домейн завършва на:
+
+#{0}: File path
+#{1}: Error message
+SaveRulesErrorMessage=Неуспешен опит за запис на правилата в {0}:\n\n{1}
+
+IconMenuConfigure=Настройки...
+
+IconMenuExit=Изход
+
+IconMenuResetPreviouslyVisited=Изчисти предишно посетени
+
+IconMenuAddRule=Добави правило за сайт...
+
+SwitchTooltip=Превключено на '{0}' от правило: {1}
+
+PreviouslyVisitedPageRuleNameSite=Предишно посетен сайт: {0}
+PreviouslyVisitedPageRuleNamePage=Предишно посетена страница

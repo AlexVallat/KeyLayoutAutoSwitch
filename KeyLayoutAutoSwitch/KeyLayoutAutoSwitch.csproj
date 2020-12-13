@@ -120,26 +120,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localisation\qps-ploc\Resources.qps-ploc.restext">
-      <DependentUpon>..\..\Properties\Resources.Designer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localisation\qps-ploc\Configuration.qps-ploc.restext">
-      <DependentUpon>..\..\Configuration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localisation\qps-ploc\DomainRuleEditor.qps-ploc.restext">
-      <DependentUpon>..\..\DomainRuleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localisation\qps-ploc\FindInPageRuleEditor.qps-ploc.restext">
-      <DependentUpon>..\..\FindInPageRuleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localisation\qps-ploc\RuleEditor.qps-ploc.restext">
-      <DependentUpon>..\..\RuleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localisation\qps-ploc\PreviouslyVisitedPageRuleEditor.qps-ploc.restext">
-      <DependentUpon>..\..\PreviouslyVisitedPageRuleEditor.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Localisation\qps-ploc\Resources.qps-ploc.restext" />
+    <EmbeddedResource Include="Localisation\qps-ploc\Configuration.qps-ploc.restext" />
+    <EmbeddedResource Include="Localisation\qps-ploc\DomainRuleEditor.qps-ploc.restext" />
+    <EmbeddedResource Include="Localisation\qps-ploc\FindInPageRuleEditor.qps-ploc.restext" />
+    <EmbeddedResource Include="Localisation\qps-ploc\RuleEditor.qps-ploc.restext" />
+    <EmbeddedResource Include="Localisation\qps-ploc\PreviouslyVisitedPageRuleEditor.qps-ploc.restext" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Localisation\bg\Configuration.bg.restext" />
+    <EmbeddedResource Include="Localisation\bg\DomainRuleEditor.bg.restext" />
+    <EmbeddedResource Include="Localisation\bg\FindInPageRuleEditor.bg.restext" />
+    <EmbeddedResource Include="Localisation\bg\PreviouslyVisitedPageRuleEditor.bg.restext" />
+    <EmbeddedResource Include="Localisation\bg\Resources.bg.restext" />
+    <EmbeddedResource Include="Localisation\bg\RuleEditor.bg.restext" />
     <None Include="Localisation\GenerateLocale.bat" />
     <None Include="packages.config" />
     <None Include="Resources\LanguageBar.ico" />
@@ -152,6 +146,16 @@
       <EmbeddedResource Condition="$([System.IO.Path]::HasExtension(%(Filename))) AND $([System.IO.Path]::GetExtension(%(Filename)).TrimStart('.')) == 'qps-ploc'">
         <Culture>$([System.IO.Path]::GetExtension(%(Filename)).TrimStart('.'))</Culture>
         <WithCulture>true</WithCulture>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
+  <Target Name="AssignRestextDependentUpon" AfterTargets="AssignCustomCultures">
+    <ItemGroup>
+      <EmbeddedResource Condition="%(RelativeDir) != '' AND $([System.String]::new(%(RelativeDir)).StartsWith('Localisation'))">
+        <DependentUpon>..\..\$([System.IO.Path]::GetFileNameWithoutExtension(%(Filename))).cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Condition="%(RelativeDir) != '' AND $([System.String]::new(%(RelativeDir)).StartsWith('Localisation')) AND $([System.IO.Path]::GetFileNameWithoutExtension(%(Filename))) == 'Resources'">
+        <DependentUpon>..\..\Properties\Resources.Designer.cs</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
   </Target>

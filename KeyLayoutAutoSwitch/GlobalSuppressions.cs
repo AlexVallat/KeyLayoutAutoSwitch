@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Redundancy", "RCS1036:Remove redundant empty line.", Justification = "WinForms Designer", Scope = "member", Target = "~M:KeyLayoutAutoSwitch.FindInPageRuleEditor.InitializeComponent")]
 [assembly: SuppressMessage("Style", "IDE0007:Use implicit type", Justification = "WinForms Designer", Scope = "member", Target = "~M:KeyLayoutAutoSwitch.PreviouslyVisitedPageRuleEditor.InitializeComponent")]
 [assembly: SuppressMessage("Redundancy", "RCS1036:Remove redundant empty line.", Justification = "WinForms Designer", Scope = "member", Target = "~M:KeyLayoutAutoSwitch.PreviouslyVisitedPageRuleEditor.InitializeComponent")]
+[assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Scope = "module")]

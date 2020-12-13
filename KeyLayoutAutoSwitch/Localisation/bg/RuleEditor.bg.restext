@@ -1,0 +1,10 @@
+﻿mDoNotChange.Text=Не променяй клавиатурната подредба
+
+mSetLayout.Text=Превключи клавиатурната подредба на:
+
+mCancel.Text=Откажи
+
+mOK.Text=OK
+
+#{0}: Name of rule being edited
+$this.Text=Редакция на правило - {0}

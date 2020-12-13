@@ -17,18 +17,16 @@ namespace KeyLayoutAutoSwitch
 		{
 			var children = new object[parent.accChildCount];
 
-			int count;
-			var result = AccessibleChildren(parent, 0, children.Length, children, out count);
+			var result = AccessibleChildren(parent, 0, children.Length, children, out var count);
 			if (result != 0 && result != 1)
 			{
-				return new IAccessible[0];
+				return Enumerable.Empty<IAccessible>();
 			}
 			if (count == 1 && children[0] is int)
 			{
-				var child = parent.accNavigate(NAVDIR_FIRSTCHILD, 0) as IAccessible;
-				if (child == null)
+				if (!(parent.accNavigate(NAVDIR_FIRSTCHILD, 0) is IAccessible child))
 				{
-					return new IAccessible[0];
+					return Enumerable.Empty<IAccessible>();
 				}
 				return new[] { child };
 			}
@@ -106,7 +104,6 @@ namespace KeyLayoutAutoSwitch
 			}
 		}
 
-
 		public static AccessibleRole GetRole(IAccessible accessibleObject)
 		{
 			try
@@ -118,6 +115,5 @@ namespace KeyLayoutAutoSwitch
 				return AccessibleRole.None;
 			}
 		}
-		
 	}
 }

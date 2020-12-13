@@ -47,6 +47,8 @@ Then, edit each .restext file to replace the English strings that appear between
 
 Translations may be submitted directly as pull-requests, or by attaching to an issue (and I will handle merging).
 
+KeyLayoutAutoSwitch will use the default windows locale, but this may be overridden by adding the command line parameter `--locale` (for example `KeyLayoutAutoSwitch.exe --locale en`)
+
 ## Donations
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
@@ -57,6 +59,7 @@ v1.3:
 * Added context menu command to Add a Site Rule, pre-populated with the current site (if any) and layout
 * Added tooltip to the icon which indicates why the current keyboard layout has been chosen
 * Double clicking on the icon now only opens the configuration window if it is a left-click
+* Added Bulgarian translation (thanks @ablazhov)
 
 v1.2:
 * Updated compatibility with latest Firefox

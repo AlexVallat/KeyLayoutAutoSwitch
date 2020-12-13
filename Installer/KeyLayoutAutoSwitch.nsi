@@ -56,6 +56,7 @@ SectionEnd
 !macroend
 
 #!insertmacro Language "qps-ploc"
+!insertmacro Language "bg"
 
 Section -Post
 	WriteUninstaller "$INSTDIR\uninstall.exe"
