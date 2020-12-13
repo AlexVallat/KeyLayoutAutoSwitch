@@ -151,6 +151,15 @@ namespace KeyLayoutAutoSwitch.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Site Rule....
+        /// </summary>
+        internal static string IconMenuAddRule {
+            get {
+                return ResourceManager.GetString("IconMenuAddRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure....
         /// </summary>
         internal static string IconMenuConfigure {

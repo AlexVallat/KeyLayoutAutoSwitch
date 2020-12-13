@@ -213,4 +213,7 @@
     <comment>{0}: Keyboard layout
 {1}: Rule description</comment>
   </data>
+  <data name="IconMenuAddRule" xml:space="preserve">
+    <value>Add Site Rule...</value>
+  </data>
 </root>

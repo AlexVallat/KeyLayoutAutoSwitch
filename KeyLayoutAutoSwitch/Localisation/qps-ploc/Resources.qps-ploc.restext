@@ -51,6 +51,8 @@ IconMenuExit=»»Exit««
 
 IconMenuResetPreviouslyVisited=»»Clear Previously Visited««
 
+IconMenuAddRule=»»Add Site Rule...««
+
 SwitchTooltip=»»Switched to '{0}' by rule: {1}««
 
 PreviouslyVisitedPageRuleNameSite=»»Previously visited site: {0}««

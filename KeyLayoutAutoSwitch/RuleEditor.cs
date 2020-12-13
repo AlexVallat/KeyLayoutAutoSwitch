@@ -32,6 +32,10 @@ namespace KeyLayoutAutoSwitch
 
 			PopulateControlsFromRule();
 
+			if (owner == null)
+			{
+				StartPosition = FormStartPosition.CenterScreen;
+			}
 			var dialogResult = ShowDialog(owner);
 			if (dialogResult == DialogResult.OK)
 			{

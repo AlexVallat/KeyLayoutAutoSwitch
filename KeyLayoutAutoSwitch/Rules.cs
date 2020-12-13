@@ -30,6 +30,15 @@ namespace KeyLayoutAutoSwitch
 		private static readonly Lazy<Rules> sRules = new Lazy<Rules>(() => new Rules());
 		public static Rules Instance => sRules.Value;
 
+		public static string GetDomain(string url)
+		{
+			if (Uri.TryCreate(url, UriKind.Absolute, out var uri))
+			{
+				return uri.Host;
+			}
+			return null;
+		}
+
 		public IEnumerable<Rule> GetAllRules()
 		{
 			yield return mPreviouslyVisitedPageRule;
@@ -83,9 +92,9 @@ namespace KeyLayoutAutoSwitch
 
 		private Rule GetDomainRule(string urlString)
 		{
-			if (Uri.TryCreate(urlString, UriKind.Absolute, out var uri))
+			var domain = GetDomain(urlString);
+			if (domain != null)
 			{
-				var domain = uri.Host;
 				return mDomainRules.OrderByDescending(r => r.DomainSuffix.Length).FirstOrDefault(r => domain.EndsWith(r.DomainSuffix, StringComparison.InvariantCultureIgnoreCase)) ?? (Rule)mDefaultPageRule;
 			}
 

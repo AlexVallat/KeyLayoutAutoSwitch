@@ -69,7 +69,7 @@ namespace KeyLayoutAutoSwitch
 			mRemove.Enabled = mRules.SelectedObject is DomainRule;
 		}
 
-		private void SaveAndUpdateList()
+		internal void SaveAndUpdateList()
 		{
 			Rules.Instance.Save();
 			mRules.BuildList();

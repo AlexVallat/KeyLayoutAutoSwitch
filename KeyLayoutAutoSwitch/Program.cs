@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using CommandLine;
 using CommandLine.Text;
@@ -119,6 +120,28 @@ namespace KeyLayoutAutoSwitch
 				}
 			}
 		}
+
+		internal static void ShowAddDomainRule(string url)
+		{
+			var newRule = new DomainRule
+			{
+				DomainSuffix = Rules.GetDomain(url),
+				Language = InputLanguage.CurrentInputLanguage
+			};
+
+			if (newRule.ShowEditorDialog(sCurrentConfigDialog) == DialogResult.OK)
+			{
+				Rules.Instance.AddDomainRule(newRule);
+				if (sCurrentConfigDialog != null)
+				{
+					sCurrentConfigDialog.SaveAndUpdateList();
+				}
+				else
+				{
+					Rules.Instance.Save();
+				}
+			}
+		}
 	}
 
 	internal class BackgroundApplicationContext : ApplicationContext
@@ -143,6 +166,7 @@ namespace KeyLayoutAutoSwitch
 			mNotifyIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[]
 			{
 				new ToolStripMenuItem(Resources.IconMenuConfigure, null, OnConfigure),
+				new ToolStripMenuItem(Resources.IconMenuAddRule, null, OnAddRule),
 				resetPreviouslyVisitedMenuItem = new ToolStripMenuItem(Resources.IconMenuResetPreviouslyVisited, null, OnResetPreviouslyVisited),
 				new ToolStripSeparator(),
 				new ToolStripMenuItem(Resources.IconMenuExit, null, OnExit),
@@ -160,7 +184,7 @@ namespace KeyLayoutAutoSwitch
 
 			if (showInitialConfigDialog)
 			{
-				Program.ShowConfigDialog();
+				SynchronizationContext.Current.Post(_ => Program.ShowConfigDialog(), null);
 			}
 		}
 
@@ -171,6 +195,11 @@ namespace KeyLayoutAutoSwitch
 		private void OnResetPreviouslyVisited(object sender, EventArgs e)
 		{
 			mPreviousUrlLayouts.Clear();
+		}
+
+		private void OnAddRule(object sender, EventArgs e)
+		{
+			Program.ShowAddDomainRule(mLastFocusedUrl);
 		}
 
 		private void OnConfigure(object sender, EventArgs e)

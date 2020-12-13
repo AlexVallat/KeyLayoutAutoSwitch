@@ -130,9 +130,9 @@ namespace KeyLayoutAutoSwitch
 
 		public string GetApplicableUrl(string urlString)
 		{
-			if (ApplyToSite && Uri.TryCreate(urlString, UriKind.Absolute, out var uri))
+			if (ApplyToSite)
 			{
-				return uri.Host;
+				return Rules.GetDomain(urlString) ?? urlString;
 			}
 			return urlString;
 		}

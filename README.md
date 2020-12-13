@@ -54,6 +54,7 @@ Donations are very welcome, and may be made through PayPal by using the [Donate]
 v1.3:
 * Added new option to Previously visited web pages rule, to apply the last used keyboard layout for the whole site (domain)
 * Added context menu command to clear the previously visited web pages, forgetting all last used layouts
+* Added context menu command to Add a Site Rule, pre-populated with the current site (if any) and layout
 * Added tooltip to the icon which indicates why the current keyboard layout has been chosen
 
 v1.2:
