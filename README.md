@@ -56,6 +56,7 @@ v1.3:
 * Added context menu command to clear the previously visited web pages, forgetting all last used layouts
 * Added context menu command to Add a Site Rule, pre-populated with the current site (if any) and layout
 * Added tooltip to the icon which indicates why the current keyboard layout has been chosen
+* Double clicking on the icon now only opens the configuration window if it is a left-click
 
 v1.2:
 * Updated compatibility with latest Firefox

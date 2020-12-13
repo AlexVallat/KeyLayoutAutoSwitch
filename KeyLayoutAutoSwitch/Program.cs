@@ -178,13 +178,21 @@ namespace KeyLayoutAutoSwitch
 				resetPreviouslyVisitedMenuItem.Visible = Rules.Instance.PreviouslyVisitedPageRule.RestorePreviousLayout;
 			};
 
-			mNotifyIcon.DoubleClick += OnConfigure;
+			mNotifyIcon.MouseDoubleClick += OnDoubleClick;
 
 			mNotifyIcon.Visible = true;
 
 			if (showInitialConfigDialog)
 			{
 				SynchronizationContext.Current.Post(_ => Program.ShowConfigDialog(), null);
+			}
+		}
+
+		private void OnDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				Program.ShowConfigDialog();
 			}
 		}
 
