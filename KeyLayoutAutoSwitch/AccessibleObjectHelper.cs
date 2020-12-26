@@ -9,6 +9,15 @@ namespace KeyLayoutAutoSwitch
 {
 	internal static class AccessibleObjectHelper
 	{
+		[DllImport("oleacc.dll", ExactSpelling = true, PreserveSig = false)]
+		[return: MarshalAs(UnmanagedType.Interface)]
+		private static extern object AccessibleObjectFromWindow(
+			IntPtr hwnd,
+			uint dwObjectID,
+			[In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+		
+		private static readonly Guid IID_IAccessible = new Guid("{618736E0-3C3D-11CF-810C-00AA00389B71}");
+
 		[DllImport("oleacc.dll")]
 		private static extern uint AccessibleChildren(IAccessible paccContainer, int iChildStart, int cChildren, [Out] object[] rgvarChildren, out int pcObtained);
 		private const int NAVDIR_FIRSTCHILD = 7;
@@ -114,6 +123,11 @@ namespace KeyLayoutAutoSwitch
 			{
 				return AccessibleRole.None;
 			}
+		}
+
+		public static IAccessible GetAccessibleObjectFromWindow(IntPtr hwnd, uint objectID = 0)
+		{
+			return (IAccessible)AccessibleObjectFromWindow(hwnd, objectID, IID_IAccessible);
 		}
 	}
 }

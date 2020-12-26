@@ -33,10 +33,13 @@ Note that the visited URLs are stored hashed, and in memory only. They are never
 
 To exit KeyLayoutAutoSwitch entirely, right click on the notification area icon and choose "Exit". KeyLayoutAutoSwitch will no longer be running in the background, and will not change keyboard layouts until it is next run.
 
+## Chrome Support
+KeyLayoutAutoSwitch also supports Chrome and most Chromium-based browsers, however the Find in Page rule "Match web page" will not work (the URL is not know for the Find in Page popup). Instead, use the "Do not change" rule, which is similar.
+
+If Chrome is not automatically enabling accessibility then this can be forced by adding the "--force-renderer-accessibility" flag on the command line. This will not generally be required, but if you are finding that the site rules are having no effect then it is worth trying.
+
 ## Limitations
 KeyLayoutAutoSwitch uses the Accessibility interfaces to obtain information from the web browser about which element is focused. If Accessibility services have been disabled in the browser it will not be able to function properly.
-
-At present only Firefox is supported, although it is anticipated that support for other browsers may be added in the future.
 
 KeyLayoutAutoSwitch is Windows only. Linux support would be nice to have, but is unlikely to happen soon, unless someone with knowledge of Linux accessibility services and Mono is willing to contribute development work to the project.
 
@@ -53,6 +56,9 @@ KeyLayoutAutoSwitch will use the default windows locale, but this may be overrid
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
 ## Changelog
+v2.0:
+* Added support for Chrome and Chromium-based browsers
+
 v1.3:
 * Added new option to Previously visited web pages rule, to apply the last used keyboard layout for the whole site (domain)
 * Added context menu command to clear the previously visited web pages, forgetting all last used layouts

@@ -148,10 +148,12 @@ namespace KeyLayoutAutoSwitch
 	{
 		private readonly NotifyIcon mNotifyIcon;
 		private readonly IDisposable mFocusEventHook;
+		private readonly ChromeAccessibilityWinEventHook mChromeAccessibilityWinEventHook;
 
 		public BackgroundApplicationContext(bool showInitialConfigDialog)
 		{
 			mFocusEventHook = NativeMethods.AddFocusEventHook(OnFocusChanged);
+			mChromeAccessibilityWinEventHook = new ChromeAccessibilityWinEventHook();
 
 			Application.ApplicationExit += OnApplicationExit;
 
@@ -241,7 +243,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			var className = NativeMethods.GetWindowClassName(hwnd);
 
-			Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}, layout {NativeMethods.GetKeyboardLayout(hwnd)}");
+			//Debug.WriteLine($"Focus changed to window: {hwnd} ({className}), object {idObject}, child {idChild}, layout {NativeMethods.GetKeyboardLayout(hwnd)}");
 
 			Browser browser = null;
 			switch (className)
@@ -252,8 +254,11 @@ namespace KeyLayoutAutoSwitch
 				case "Chrome_RenderWidgetHostHWND":
 					browser = new Chrome();
 					break;
-				case "Chrome_WidgetWin_1":
-					browser = new ChromeWidgets();
+				default:
+					if (className.StartsWith("Chrome_WidgetWin_"))
+					{
+						browser = new ChromeWidgets();
+					}
 					break;
 			}
 			if (browser != null)
@@ -338,6 +343,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			mFocusEventHook.Dispose();
 			mNotifyIcon.Dispose();
+			mChromeAccessibilityWinEventHook.Dispose();
 		}
 	}
 }

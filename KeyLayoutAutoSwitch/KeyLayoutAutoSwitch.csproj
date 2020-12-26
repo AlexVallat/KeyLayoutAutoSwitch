@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AccessibleObjectHelper.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="ChromeAccessibilityWinEventHook.cs" />
     <Compile Include="ChromeWidgets.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Chrome.cs" />
