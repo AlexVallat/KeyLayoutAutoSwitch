@@ -269,9 +269,15 @@ namespace KeyLayoutAutoSwitch
 					if (accessibleObject != null)
 					{
 						var focusType = browser.GetFocusType(accessibleObject, out var fullUrl);
+						if (focusType == FocusType.Ignore)
+						{
+							//Debug.WriteLine($"Ignoring focus on accessible object: {accessibleObject.accName[0]} ({AccessibleObjectHelper.GetRole(accessibleObject)})");
+							return;
+						}
+
 						var url = fullUrl == null ? null : new Uri(fullUrl).GetLeftPart(UriPartial.Path); // Ignore query and anchor parts of the URL
 
-						Debug.WriteLine($"Focus on {focusType} with url {url}");
+						Debug.WriteLine($"Focus on {focusType} with url {url} {DateTime.UtcNow.Ticks}");
 						//Debug.WriteLine($"Focus on accessible object: {accessibleObject.accName[0]} ({AccessibleObjectHelper.GetRole(accessibleObject)})");
 
 						// If the URL hasn't changed (and it's a URL-based focus) then don't re-apply the keyboard layout

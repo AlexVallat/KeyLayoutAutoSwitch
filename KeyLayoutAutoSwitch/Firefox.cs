@@ -9,6 +9,12 @@ namespace KeyLayoutAutoSwitch
 		{
 			url = null;
 
+			// When switching to Firefox it can raise focus for both the focused element and the application, so ignore the application bit
+			if (AccessibleObjectHelper.GetRole(accessibleObject) == AccessibleRole.Application)
+			{
+				return FocusType.Ignore;
+			}
+
 			// Walk up tree finding parent
 			var parent = accessibleObject;
 			while (parent != null)

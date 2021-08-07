@@ -12,7 +12,12 @@ namespace KeyLayoutAutoSwitch
 		FindInPage,
 		/// <summary>A web page</summary>
 		Page,
-		Other
+		Other,
+
+		/// <summary>
+		/// Ignore focus on elements of this type, behave as if no focus had occurred
+		/// </summary>
+		Ignore
 	}
 	internal abstract class Browser
 	{
