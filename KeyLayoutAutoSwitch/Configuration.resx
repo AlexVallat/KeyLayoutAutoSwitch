@@ -216,6 +216,9 @@
   <data name="&gt;&gt;mDonations.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="mEdit.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 66</value>
   </data>

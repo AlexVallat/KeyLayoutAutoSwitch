@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace KeyLayoutAutoSwitch
@@ -12,7 +13,7 @@ namespace KeyLayoutAutoSwitch
 			mRuleColumn.AspectGetter = o => ((Rule)o).DisplayName;
 			mLanguageColumn.AspectGetter = o => ((Rule)o).DisplayLanguage;
 
-			mRules.SetObjects(Rules.Instance.GetAllRules());
+			mRules.SetObjects(Rules.Instance.GetAllRules().Where(rule => rule.DisplayName != null));
 
 			mRules.AutoResizeColumn(mLanguageColumn.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
 		}

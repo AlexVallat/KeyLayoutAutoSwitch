@@ -25,6 +25,7 @@ namespace KeyLayoutAutoSwitch
 		private readonly LocationBarRule mLocationBarRule = new LocationBarRule();
 		private readonly SearchBarRule mSearchBarRule = new SearchBarRule();
 		private readonly DefaultUIElementRule mDefaultUIElementRule = new DefaultUIElementRule();
+		private readonly BrowserProcessNameRule mBrowserProcessNameRule = new BrowserProcessNameRule();
 
 		private Rules() {}
 		private static readonly Lazy<Rules> sRules = new Lazy<Rules>(() => new Rules());
@@ -53,6 +54,7 @@ namespace KeyLayoutAutoSwitch
 			yield return mLocationBarRule;
 			yield return mSearchBarRule;
 			yield return mDefaultUIElementRule;
+			yield return mBrowserProcessNameRule;
 		}
 
 		public void AddDomainRule(DomainRule rule)
@@ -88,6 +90,8 @@ namespace KeyLayoutAutoSwitch
 
 #pragma warning disable RCS1085 // Use auto-implemented property: Consistency with other rules
 		public PreviouslyVisitedPageRule PreviouslyVisitedPageRule => mPreviouslyVisitedPageRule;
+
+		public BrowserProcessNameRule BrowserProcessNameRule => mBrowserProcessNameRule;
 #pragma warning restore RCS1085
 
 		private Rule GetDomainRule(string urlString)

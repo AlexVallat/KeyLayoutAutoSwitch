@@ -38,6 +38,10 @@ KeyLayoutAutoSwitch also supports Chrome and most Chromium-based browsers, howev
 
 If Chrome is not automatically enabling accessibility then this can be forced by adding the "--force-renderer-accessibility" flag on the command line. This will not generally be required, but if you are finding that the site rules are having no effect then it is worth trying.
 
+## Other Browsers
+Most browsers are based on Chromium, and can be supported by KeyLayoutAutoSwitch. If your browser is not supported by default, try adding the process name (usually the .exe file, without the .exe extension) to the list of allowed browser process names
+in `%APPDATA%\KeyLayoutAutoSwitch\Rules.xml`. If it works, then post an issue here suggesting that the browser be added to the default list for future releases.
+
 ## Limitations
 KeyLayoutAutoSwitch uses the Accessibility interfaces to obtain information from the web browser about which element is focused. If Accessibility services have been disabled in the browser it will not be able to function properly.
 
@@ -56,6 +60,10 @@ KeyLayoutAutoSwitch will use the default windows locale, but this may be overrid
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
 ## Changelog
+v2.1:
+* Added browser process name allow-list to prevent activation with Electron-based non-browser applications
+* Improved reliability of URL detection when switching back to Firefox from a different application
+
 v2.0:
 * Added support for Chrome and Chromium-based browsers
 

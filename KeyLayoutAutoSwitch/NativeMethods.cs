@@ -32,7 +32,10 @@ namespace KeyLayoutAutoSwitch
 		private static extern IntPtr GetKeyboardLayout(uint idThread);
 
 		[DllImport("user32.dll")]
-		private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
+		private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr zero);
+		
+		[DllImport("user32.dll")]
+		private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int processId);
 
 		public delegate void FocusEvent(IntPtr hwnd, uint idObject, uint idChild);
 
@@ -107,6 +110,12 @@ namespace KeyLayoutAutoSwitch
 				return GetKeyboardLayout(threadId);
 			}
 			return IntPtr.Zero;
+		}
+
+		public static string GetWindowProcessName(IntPtr hWnd)
+		{
+			GetWindowThreadProcessId(hWnd, out var processId);
+			return Process.GetProcessById(processId).ProcessName;
 		}
 	}
 }

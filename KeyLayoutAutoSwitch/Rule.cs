@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -220,6 +221,51 @@ namespace KeyLayoutAutoSwitch
 		{
 			base.Deserialize(element);
 			DomainSuffix = (string)element.Attribute(DomainAttributeName);
+		}
+	}
+
+	internal class BrowserProcessNameRule : Rule
+	{
+		private static readonly string[] DefaultBrowserProcesses = new[]
+		{
+			"brave",
+			"chrome",
+			"opera",
+			"firefox",
+			"gecko"
+		};
+
+		#region Do not show in the UI
+		public override string DisplayName => null;
+		public override string RuleEditorDescription => null;
+		public override DialogResult ShowEditorDialog(IWin32Window owner = null) => DialogResult.Cancel;
+		#endregion
+
+		private readonly HashSet<string> mAllowedProcesses = new HashSet<string>(DefaultBrowserProcesses);
+
+		public bool IsProcessEnabled(string processName) => mAllowedProcesses.Contains(processName.ToLowerInvariant());
+
+		public override XElement Serialize()
+		{
+			var element = base.Serialize();
+
+			foreach (var processName in mAllowedProcesses)
+			{
+				element.Add(new XElement("Process", processName));
+			}
+
+			return element;
+		}
+
+		public override void Deserialize(XElement element)
+		{
+			base.Deserialize(element);
+
+			mAllowedProcesses.Clear();
+			foreach (var processElement in element.Elements("Process"))
+			{
+				mAllowedProcesses.Add(processElement.Value.ToLowerInvariant());
+			}
 		}
 	}
 }
