@@ -60,6 +60,9 @@ KeyLayoutAutoSwitch will use the default windows locale, but this may be overrid
 Donations are very welcome, and may be made through PayPal by using the [Donate](http://keylayoutautoswitch.byalexv.co.uk/donate) link. Or you can send directly to me in any currency using <https://www.paypal.me/toalexv>.
 
 ## Changelog
+v2.1.1:
+* Added MS Edge as a well known Chrome based browser
+
 v2.1:
 * Added browser process name allow-list to prevent activation with Electron-based non-browser applications
 * Improved reliability of URL detection when switching back to Firefox from a different application

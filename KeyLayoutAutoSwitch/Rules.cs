@@ -109,7 +109,8 @@ namespace KeyLayoutAutoSwitch
 		{
 			try
 			{
-				var rules = new XElement("Rules");
+				var rules = new XElement("Rules", new XAttribute("version", typeof(Rules).Assembly.GetName().Version.ToString()));
+
 				foreach (var rule in GetAllRules())
 				{
 					rules.Add(rule.Serialize());
@@ -134,18 +135,21 @@ namespace KeyLayoutAutoSwitch
 				}
 
 				var rules = XDocument.Load(FilePath).Root;
+
+				var version = rules.Attribute("version")?.Value ?? "2.1.0.0";
+
 				mDomainRules.Clear();
 
 				foreach (var rule in GetAllRules())
 				{
 					Debug.Assert(!(rule is DomainRule), "No domain rules should be present at this point, as mDomainRules should be emptied.");
-					DeserializeRule(rule, rules);
+					DeserializeRule(rule, rules, version);
 				}
 
 				foreach (var element in rules.Elements(new DomainRule().ElementName))
 				{
 					var domainRule = new DomainRule();
-					domainRule.Deserialize(element);
+					domainRule.Deserialize(element, version);
 					mDomainRules.Add(domainRule);
 				}
 			}
@@ -157,12 +161,12 @@ namespace KeyLayoutAutoSwitch
 			}
 		}
 
-		private void DeserializeRule(Rule rule, XElement rules)
+		private void DeserializeRule(Rule rule, XElement rules, string version)
 		{
 			var element = rules.Element(rule.ElementName);
 			if (element != null)
 			{
-				rule.Deserialize(element);
+				rule.Deserialize(element, version);
 			}
 		}
 	}

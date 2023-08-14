@@ -49,7 +49,7 @@ namespace KeyLayoutAutoSwitch
 			return element;
 		}
 
-		public virtual void Deserialize(XElement element)
+		public virtual void Deserialize(XElement element, string version)
 		{
 			var inputLanguageHandle = (long?)element.Attribute(InputLanguageAttributeName);
 			if (inputLanguageHandle.HasValue)
@@ -110,9 +110,9 @@ namespace KeyLayoutAutoSwitch
 			return element;
 		}
 
-		public override void Deserialize(XElement element)
+		public override void Deserialize(XElement element, string version)
 		{
-			base.Deserialize(element);
+			base.Deserialize(element, version);
 			MatchPageDomainRule = ((bool?)element.Attribute(MatchPageAttributeName)) ?? false;
 		}
 	}
@@ -175,9 +175,9 @@ namespace KeyLayoutAutoSwitch
 			return element;
 		}
 
-		public override void Deserialize(XElement element)
+		public override void Deserialize(XElement element, string version)
 		{
-			base.Deserialize(element);
+			base.Deserialize(element, version);
 			RestorePreviousLayout = ((bool?)element.Attribute(RestorePreviousLayoutAttributeName)) ?? false;
 			ApplyToSite = ((bool?)element.Attribute(ApplyToSiteAttributeName)) ?? false;
 		}
@@ -217,9 +217,9 @@ namespace KeyLayoutAutoSwitch
 			return element;
 		}
 
-		public override void Deserialize(XElement element)
+		public override void Deserialize(XElement element, string version)
 		{
-			base.Deserialize(element);
+			base.Deserialize(element, version);
 			DomainSuffix = (string)element.Attribute(DomainAttributeName);
 		}
 	}
@@ -230,6 +230,7 @@ namespace KeyLayoutAutoSwitch
 		{
 			"brave",
 			"chrome",
+			"msedge",
 			"opera",
 			"firefox",
 			"gecko"
@@ -257,14 +258,24 @@ namespace KeyLayoutAutoSwitch
 			return element;
 		}
 
-		public override void Deserialize(XElement element)
+		public override void Deserialize(XElement element, string version)
 		{
-			base.Deserialize(element);
+			base.Deserialize(element, version);
 
 			mAllowedProcesses.Clear();
 			foreach (var processElement in element.Elements("Process"))
 			{
 				mAllowedProcesses.Add(processElement.Value.ToLowerInvariant());
+			}
+
+			// Upgrade from old rules versions
+			switch (version)
+			{
+				case "2.1.0.0":
+					mAllowedProcesses.Add("msedge");
+					break;
+				default:
+					break;
 			}
 		}
 	}
